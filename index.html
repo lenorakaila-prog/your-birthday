@@ -7,57 +7,70 @@
 <title>Arya's Birthday Race 🏁</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-  background: #f5d7a1;
-  color: #fff;
+body{
+  font-family:Arial,sans-serif;
+  background:#69c7e7;
+  color:white;
+  overflow:hidden;
 }
 
-.page {
-  display: none;
-  width: 100%;
-  height: 100vh;
-  padding: 30px 22px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+.page{
+  display:none;
+  position:relative;
+  width:100%;
+  height:100vh;
+  padding:25px 18px;
+  overflow:hidden;
+  text-align:center;
 }
 
-.page.active {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  animation: masuk .6s ease;
+.page.active{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  animation:pageIn .5s ease;
 }
 
-@keyframes masuk {
-  from {opacity:0; transform:scale(.96);}
-  to {opacity:1; transform:scale(1);}
+@keyframes pageIn{
+  from{opacity:0;transform:scale(.97)}
+  to{opacity:1;transform:scale(1)}
 }
 
-/* ---------- BACKGROUND ---------- */
 
-.desert {
-  background:
-    linear-gradient(#68c8e8 0 58%, #e7a858 58% 100%);
+/* =========================
+   BACKGROUNDS
+========================= */
+
+.desert{
+  background:linear-gradient(
+    #69c9e9 0%,
+    #69c9e9 57%,
+    #e5a85d 57%,
+    #d88c43 100%
+  );
 }
 
-.sunset {
-  background:
-    linear-gradient(#f59b6b, #d85d68 45%, #522c5e);
+.sunset{
+  background:linear-gradient(
+    #ffba77,
+    #e56d6f 45%,
+    #66365d
+  );
 }
 
-/* awan */
 
-.cloud {
+/* =========================
+   CLOUDS
+========================= */
+
+.cloud{
   position:absolute;
   width:100px;
   height:30px;
@@ -67,362 +80,622 @@ body {
 }
 
 .cloud:before,
-.cloud:after {
+.cloud:after{
   content:"";
   position:absolute;
   background:white;
   border-radius:50%;
 }
 
-.cloud:before {
+.cloud:before{
   width:45px;
   height:45px;
   left:15px;
   top:-20px;
 }
 
-.cloud:after {
+.cloud:after{
   width:55px;
   height:55px;
   right:10px;
   top:-27px;
 }
 
-/* jalan */
 
-.road {
+/* =========================
+   ROAD
+========================= */
+
+.road{
   position:absolute;
   bottom:0;
   left:0;
   width:100%;
-  height:27%;
-  background:#343434;
-  border-top:8px solid #d8b071;
+  height:25%;
+  background:#353535;
+  border-top:7px solid #e7bd7c;
 }
 
-.road:after {
+.road:after{
   content:"";
   position:absolute;
+  left:0;
+  top:48%;
   width:100%;
   height:6px;
-  top:48%;
-  left:0;
+
   background:repeating-linear-gradient(
     90deg,
-    #ffd85a 0 45px,
-    transparent 45px 85px
+    #ffd64c 0 45px,
+    transparent 45px 90px
   );
 }
 
-/* ---------- CARD ---------- */
 
-.card {
-  background:rgba(255,255,255,.94);
-  color:#392e2e;
-  width:min(90%, 480px);
-  padding:28px 22px;
-  border-radius:25px;
-  box-shadow:0 12px 30px rgba(0,0,0,.18);
-  z-index:5;
-}
+/* =========================
+   CHECKERED FLAG
+========================= */
 
-h1 {
-  font-size:36px;
-  margin-bottom:10px;
-}
-
-h2 {
-  margin-bottom:15px;
-}
-
-p {
-  line-height:1.6;
-}
-
-.small {
-  font-size:14px;
-  opacity:.75;
-}
-
-/* ---------- BUTTON ---------- */
-
-button {
-  border:0;
-  margin-top:22px;
-  padding:14px 25px;
-  border-radius:30px;
-  background:#c52c2c;
-  color:white;
-  font-weight:bold;
-  font-size:16px;
-  cursor:pointer;
-  box-shadow:0 6px 0 #7c1717;
-}
-
-button:active {
-  transform:translateY(4px);
-  box-shadow:0 2px 0 #7c1717;
-}
-
-/* ---------- MOBIL ---------- */
-
-.car {
+.checkered{
   position:absolute;
-  bottom:16%;
-  left:-140px;
-  font-size:75px;
-  z-index:3;
+  top:0;
+  left:0;
+  width:100%;
+  height:25px;
+
+  background:
+  conic-gradient(
+    #fff 25%,
+    #222 0 50%,
+    #fff 0 75%,
+    #222 0
+  ) 0 0/30px 30px;
 }
 
-.drive {
-  animation:drive 2.3s ease-in-out forwards;
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+  width:min(92%,480px);
+  background:rgba(255,255,255,.95);
+  color:#392f2f;
+  border-radius:25px;
+  padding:27px 22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.2);
+  position:relative;
+  z-index:10;
 }
 
-@keyframes drive {
-  0% {left:-140px;}
-  70% {left:55%;}
-  100% {left:110%;}
+h1{
+  font-size:34px;
+  margin:8px 0;
 }
 
-/* ---------- START LIGHT ---------- */
+h2{
+  margin:8px 0 15px;
+}
 
-.lights {
+p{
+  line-height:1.55;
+}
+
+.small{
+  font-size:13px;
+  opacity:.7;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+button{
+  border:0;
+  padding:14px 24px;
+  margin-top:20px;
+
+  background:#c92f2f;
+  color:white;
+
+  font-size:15px;
+  font-weight:bold;
+
+  border-radius:30px;
+
+  box-shadow:0 6px 0 #7d1919;
+
+  cursor:pointer;
+  touch-action:manipulation;
+}
+
+button:active{
+  transform:translateY(4px);
+  box-shadow:0 2px 0 #7d1919;
+}
+
+
+/* =========================
+   STARTING LIGHTS
+========================= */
+
+.lights{
   display:flex;
-  gap:12px;
   justify-content:center;
-  margin:25px;
+  gap:12px;
+  margin:20px;
 }
 
-.light {
+.light{
   width:35px;
   height:35px;
   border-radius:50%;
-  background:#333;
 }
 
-.red {background:#e33;}
-.yellow {background:#ffd43b;}
-.green {background:#47c96b;}
+.red{background:#e53c3c;}
+.yellow{background:#ffd23f;}
+.green{background:#4bc66b;}
 
-/* ---------- GAME ---------- */
 
-.track {
-  position:relative;
-  width:90%;
-  max-width:500px;
-  height:130px;
-  background:#444;
-  border-radius:20px;
-  margin-top:25px;
-  overflow:hidden;
-  border:5px solid white;
-}
+/* =========================
+   OPENING CAR
+========================= */
 
-.gameCar {
+.openingCar{
   position:absolute;
-  left:5px;
-  top:30px;
-  font-size:55px;
-  transition:left .3s;
+  left:-150px;
+  bottom:14%;
+  font-size:75px;
+  z-index:5;
 }
 
-.finish {
-  position:absolute;
-  right:15px;
-  height:100%;
-  font-size:55px;
+.drive{
+  animation:drive 2.2s ease-in-out forwards;
+}
+
+@keyframes drive{
+  0%{left:-150px}
+  65%{left:52%}
+  100%{left:110%}
+}
+
+
+/* =========================
+   GRAND PRIX
+========================= */
+
+.gameCard{
+  padding:15px;
+}
+
+.gameInfo{
   display:flex;
+  justify-content:space-between;
   align-items:center;
-}
+  margin:12px 5px;
 
-.progress {
-  margin-top:15px;
+  font-size:14px;
   font-weight:bold;
 }
 
-/* ---------- GARAGE ---------- */
+#raceGame{
+  position:relative;
 
-.garage {
+  width:100%;
+  max-width:350px;
+  height:420px;
+
+  margin:auto;
+
+  background:#373737;
+
+  border:5px solid #eee;
+  border-radius:18px;
+
+  overflow:hidden;
+}
+
+
+/* jalan bergerak */
+
+.laneLine{
+  position:absolute;
+  top:-60px;
+
+  width:5px;
+  height:120%;
+
+  background:repeating-linear-gradient(
+    to bottom,
+    white 0px,
+    white 30px,
+    transparent 30px,
+    transparent 65px
+  );
+
+  animation:roadMoving .45s linear infinite;
+}
+
+.line1{left:33%;}
+.line2{left:66%;}
+
+@keyframes roadMoving{
+  from{transform:translateY(-65px)}
+  to{transform:translateY(0)}
+}
+
+
+/* player */
+
+#playerCar{
+  position:absolute;
+  bottom:20px;
+  left:42%;
+
+  font-size:48px;
+
+  z-index:10;
+
+  transition:left .12s ease;
+}
+
+
+/* obstacles */
+
+.obstacle,
+.starItem{
+  position:absolute;
+  top:-60px;
+  z-index:7;
+}
+
+.obstacle{
+  font-size:38px;
+}
+
+.starItem{
+  font-size:31px;
+}
+
+
+/* controls */
+
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:35px;
+  margin-top:10px;
+}
+
+.controlBtn{
+  width:85px;
+  height:50px;
+
+  margin:0;
+  padding:0;
+
+  font-size:25px;
+}
+
+
+/* crash animation */
+
+.crash{
+  animation:crashShake .25s;
+}
+
+@keyframes crashShake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-9px)}
+  50%{transform:translateX(9px)}
+  75%{transform:translateX(-9px)}
+  100%{transform:translateX(0)}
+}
+
+
+/* =========================
+   GARAGE
+========================= */
+
+.garage{
   font-size:100px;
+  margin:15px;
   cursor:pointer;
-  transition:.3s;
+
+  animation:garagePulse 1.5s infinite;
 }
 
-.garage:hover {
-  transform:scale(1.08);
+@keyframes garagePulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
 }
 
-/* ---------- LETTER ---------- */
 
-.letter {
-  max-height:65vh;
+/* =========================
+   LETTER
+========================= */
+
+.letter{
+  max-height:76vh;
   overflow-y:auto;
+
   text-align:left;
-  font-size:15px;
+
+  padding:25px;
 }
 
-.letter p {
+.letter p{
   margin-bottom:15px;
 }
 
-/* ---------- HEARTS ---------- */
 
-.heart {
-  position:absolute;
+/* =========================
+   CONFETTI
+========================= */
+
+.confetti{
+  position:fixed;
+
+  bottom:-40px;
+
   font-size:25px;
-  animation:float 4s linear forwards;
+
+  z-index:1000;
+
+  pointer-events:none;
+
+  animation:confettiUp 4s linear forwards;
 }
 
-@keyframes float {
-  from {
-    transform:translateY(100vh);
+@keyframes confettiUp{
+  from{
+    transform:translateY(0) rotate(0deg);
     opacity:1;
   }
-  to {
-    transform:translateY(-100px);
+
+  to{
+    transform:translateY(-115vh) rotate(360deg);
     opacity:0;
   }
 }
 
-/* ---------- CHECKERED ---------- */
 
-.checkered {
-  height:25px;
-  width:100%;
-  position:absolute;
-  top:0;
-  background:
-    conic-gradient(#fff 25%,#222 0 50%,#fff 0 75%,#222 0)
-    0 0/30px 30px;
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-height:700px){
+
+  #raceGame{
+    height:330px;
+  }
+
+  .card{
+    padding:18px;
+  }
+
+  h1{
+    font-size:28px;
+  }
+
 }
 
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= OPENING ================= -->
+
+<!-- =================================
+     PAGE 1 - OPENING
+================================= -->
 
 <section class="page desert active" id="p1">
 
 <div class="checkered"></div>
 
-<div class="cloud" style="top:15%;left:8%"></div>
-<div class="cloud" style="top:22%;right:10%;transform:scale(.7)"></div>
-
-<div class="card">
-  <div class="small">🏁 SPECIAL RACE INVITATION</div>
-
-  <h1>ARYA'S<br>BIRTHDAY RACE</h1>
-
-  <p>
-    psst... today's race is a little different 👀
-  </p>
-
-  <div class="lights">
-    <div class="light red"></div>
-    <div class="light yellow"></div>
-    <div class="light green"></div>
-  </div>
-
-  <p><b>Ready, racer?</b></p>
-
-  <button onclick="startRace()">
-    START THE ENGINE 🏁
-  </button>
+<div class="cloud"
+style="top:15%;left:8%">
 </div>
 
-<div class="road"></div>
-<div class="car" id="openingCar">🏎️</div>
-
-</section>
-
-
-<!-- ================= BIRTHDAY ================= -->
-
-<section class="page desert" id="p2">
-
-<div class="cloud" style="top:12%;right:10%"></div>
-
-<div class="card">
-
-  <div style="font-size:55px">🎂🏎️</div>
-
-  <h1>HAPPY BIRTHDAY!</h1>
-
-  <h2>ARYAAA 🤍</h2>
-
-  <p>
-    another lap around the sun completed!
-  </p>
-
-  <p style="margin-top:12px">
-    24 • 12 • 2011
-  </p>
-
-  <button onclick="showPage(3)">
-    NEXT PIT STOP →
-  </button>
-
+<div class="cloud"
+style="top:22%;right:8%;transform:scale(.7)">
 </div>
 
-<div class="road"></div>
-
-</section>
-
-
-<!-- ================= GAME ================= -->
-
-<section class="page desert" id="p3">
 
 <div class="card">
 
-<h2>🏁 PIT STOP #1</h2>
-
-<p>
-before you get your birthday present...
+<p class="small">
+🏁 SPECIAL RACE INVITATION
 </p>
 
+<h1>
+ARYA'S<br>
+BIRTHDAY RACE
+</h1>
+
 <p>
-<b>prove you're a real racer 😼</b>
+psst... today's race is a little different 👀
 </p>
 
-<div class="track">
 
-<div class="gameCar" id="gameCar">
-🏎️
+<div class="lights">
+
+<div class="light red"></div>
+
+<div class="light yellow"></div>
+
+<div class="light green"></div>
+
 </div>
 
-<div class="finish">
-🏁
-</div>
 
-</div>
+<p>
+<b>Ready, racer?</b>
+</p>
 
-<div class="progress" id="progress">
-0 / 8 BOOSTS
-</div>
 
-<button onclick="boost()">
-BOOST! 💨
+<button onclick="startRace()">
+START THE ENGINE 🏁
 </button>
 
 </div>
 
+
+<div class="road"></div>
+
+<div
+class="openingCar"
+id="openingCar">
+🏎️
+</div>
+
 </section>
 
 
-<!-- ================= WIN ================= -->
+
+<!-- =================================
+     PAGE 2 - BIRTHDAY
+================================= -->
+
+<section class="page desert" id="p2">
+
+<div class="cloud"
+style="top:12%;right:8%">
+</div>
+
+
+<div class="card">
+
+<div style="font-size:55px">
+🎂🏎️
+</div>
+
+<h1>
+HAPPY BIRTHDAY!
+</h1>
+
+<h2>
+ARYAAA 🤍
+</h2>
+
+<p>
+another lap around the sun completed!
+</p>
+
+<p style="margin-top:10px">
+<b>24 • 12 • 2011</b>
+</p>
+
+<p class="small"
+style="margin-top:12px">
+but your present isn't that easy to get 😼
+</p>
+
+
+<button onclick="showPage(3)">
+NEXT PIT STOP →
+</button>
+
+</div>
+
+<div class="road"></div>
+
+</section>
+
+
+
+<!-- =================================
+     PAGE 3 - GAME
+================================= -->
+
+<section class="page desert" id="p3">
+
+<div class="card gameCard">
+
+<h2>
+🏁 ARYA'S GRAND PRIX
+</h2>
+
+<p class="small">
+hindari rintangan, ambil ⭐, dan bertahan sampai finish!
+</p>
+
+
+<div class="gameInfo">
+
+<span id="score">
+⭐ 0
+</span>
+
+<span id="lives">
+❤️❤️❤️
+</span>
+
+<span id="distance">
+🏁 0%
+</span>
+
+</div>
+
+
+<div id="raceGame">
+
+<div class="laneLine line1"></div>
+<div class="laneLine line2"></div>
+
+<div id="playerCar">
+🏎️
+</div>
+
+</div>
+
+
+<div class="controls">
+
+<button
+class="controlBtn"
+onpointerdown="moveLeft()">
+◀
+</button>
+
+<button
+class="controlBtn"
+onpointerdown="moveRight()">
+▶
+</button>
+
+</div>
+
+
+<p class="small"
+style="margin-top:9px">
+← move your car →
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =================================
+     PAGE 4 - WIN
+================================= -->
 
 <section class="page sunset" id="p4">
 
 <div class="card">
 
-<div style="font-size:65px">
+<div style="font-size:70px">
 🏆
 </div>
 
-<h1>FINISH!!</h1>
+<h1>
+ARYA WINS!!
+</h1>
 
 <p>
 okayyy racer...
@@ -432,12 +705,21 @@ okayyy racer...
 you actually made it 😭
 </p>
 
-<p style="margin-top:10px">
-<b>you earned your birthday present.</b>
+<p style="margin-top:12px">
+<b>
+birthday present unlocked.
+</b>
 </p>
 
+<p
+id="finalScore"
+class="small"
+style="margin-top:8px">
+</p>
+
+
 <button onclick="showPage(5)">
-OPEN PRESENT 🎁
+CLAIM YOUR PRESENT 🎁
 </button>
 
 </div>
@@ -445,25 +727,34 @@ OPEN PRESENT 🎁
 </section>
 
 
-<!-- ================= GARAGE ================= -->
+
+<!-- =================================
+     PAGE 5 - GARAGE
+================================= -->
 
 <section class="page desert" id="p5">
 
 <div class="card">
 
-<h2>SECRET GARAGE 👀</h2>
+<h2>
+🔐 SECRET GARAGE
+</h2>
 
 <p>
 wait...
 </p>
 
 <p>
-there's something hiding in here.
+there's something else hiding here 👀
 </p>
 
-<div class="garage" onclick="openGarage()">
+
+<div
+class="garage"
+onclick="openGarage()">
 🚪
 </div>
+
 
 <p class="small">
 tap the garage
@@ -474,25 +765,31 @@ tap the garage
 </section>
 
 
-<!-- ================= SURPRISE ================= -->
+
+<!-- =================================
+     PAGE 6 - MESSAGE
+================================= -->
 
 <section class="page desert" id="p6">
 
 <div class="card">
 
-<div style="font-size:55px">
+<div style="font-size:60px">
 💌
 </div>
 
-<h2>A MESSAGE FOR YOU</h2>
+<h2>
+A MESSAGE FOR YOU
+</h2>
 
 <p>
 okay this part is actually serious...
 </p>
 
-<p>
+<p style="margin-top:5px">
 maybe 😒
 </p>
+
 
 <button onclick="showPage(7)">
 READ IT 💌
@@ -503,7 +800,10 @@ READ IT 💌
 </section>
 
 
-<!-- ================= LETTER ================= -->
+
+<!-- =================================
+     PAGE 7 - LETTER
+================================= -->
 
 <section class="page sunset" id="p7">
 
@@ -513,23 +813,31 @@ READ IT 💌
 for Arya 🤍
 </h2>
 
+
 <p>
 happy birthday, Aryaaa!! 🏎️🤍
 </p>
 
+
 <p>
 akhirnya nambah umur juga kamu wkwkwk.
-semoga di umur kamu yang sekarang, banyak hal baik yang dateng ke kamu.
-semoga kamu selalu sehat, bahagia, makin rajin belajarnya,
-dan apa yang kamu pengenin satu-satu bisa tercapai.
+semoga di umur kamu yang sekarang,
+banyak hal baik yang dateng ke kamu.
+semoga kamu selalu sehat, bahagia,
+makin rajin belajarnya,
+dan apa yang kamu pengenin
+satu-satu bisa tercapai.
 </p>
+
 
 <p>
 makasih yaa udah hadir di hidup aku.
 makasih juga buat semua effort kamu selama ini,
-bahkan dari hal-hal kecil yang mungkin menurut kamu biasa aja.
+bahkan dari hal-hal kecil
+yang mungkin menurut kamu biasa aja.
 tapi buat aku, itu berarti banget.
 </p>
+
 
 <p>
 aku seneng bisa kenal kamu,
@@ -538,10 +846,12 @@ bercanda sama kamu,
 dan punya banyak momen bareng kamu.
 </p>
 
+
 <p>
 pokoknya jangan berubah jadi Arya
 yang nyebelin banget aja 😒
 </p>
+
 
 <p>
 di umur baru ini,
@@ -549,16 +859,20 @@ aku harap kamu bisa jadi versi diri kamu
 yang lebih baik lagi.
 </p>
 
+
 <p>
-jangan gampang nyerah kalau ada sesuatu
-yang nggak berjalan sesuai yang kamu mau.
+jangan gampang nyerah
+kalau ada sesuatu yang nggak berjalan
+sesuai yang kamu mau.
 pelan-pelan aja,
 yang penting tetep maju.
 </p>
 
+
 <p>
 dan karena ini birthday race kamu...
 </p>
+
 
 <p>
 semoga perjalanan kamu ke depannya
@@ -567,11 +881,13 @@ orang-orang yang baik,
 dan banyak hal yang bikin kamu bahagia.
 </p>
 
+
 <p>
 kalau suatu saat jalannya agak berat,
 semoga kamu selalu punya alasan
 buat terus jalan lagi. 🏁
 </p>
+
 
 <p>
 <b>
@@ -580,18 +896,23 @@ happy birthday, Arya 🤍
 </b>
 </p>
 
+
 <p>
 enjoy your new lap!
 </p>
+
 
 <p style="text-align:right">
 — from your favorite passenger 🏎️💨
 </p>
 
+
 <div style="text-align:center">
+
 <button onclick="finalLap()">
 FINAL LAP 🏁
 </button>
+
 </div>
 
 </div>
@@ -599,189 +920,822 @@ FINAL LAP 🏁
 </section>
 
 
-<!-- ================= END ================= -->
+
+<!-- =================================
+     PAGE 8 - END
+================================= -->
 
 <section class="page sunset" id="p8">
 
 <div class="checkered"></div>
 
+
 <div class="card">
 
-<div style="font-size:60px">
+<div style="font-size:65px">
 🏎️💨
 </div>
 
-<h1>FINAL LAP</h1>
+
+<h1>
+FINAL LAP
+</h1>
+
 
 <p>
 no matter how many laps you take...
 </p>
 
+
 <p style="margin-top:15px">
+
 <b>
 i hope this year takes you
 somewhere amazing.
 </b>
+
 </p>
 
-<div style="font-size:35px;margin:20px">
+
+<div style="font-size:40px;margin:20px">
 🤍
 </div>
+
 
 <h2>
 happy birthday, Arya.
 </h2>
 
+
 <p>
 — your favorite passenger
 </p>
 
-<button onclick="location.reload()">
+
+<button onclick="restartWebsite()">
 RACE AGAIN ↻
 </button>
 
 </div>
+
 
 <div class="road"></div>
 
 </section>
 
 
+
 <script>
+
+/* =========================
+   PAGE SYSTEM
+========================= */
 
 function showPage(number){
 
-document.querySelectorAll(".page")
-.forEach(page=>{
-page.classList.remove("active");
-});
+  document
+  .querySelectorAll(".page")
+  .forEach(page=>{
 
-document.getElementById("p"+number)
-.classList.add("active");
+    page.classList.remove("active");
+
+  });
+
+
+  document
+  .getElementById("p"+number)
+  .classList.add("active");
+
+
+  if(number === 3){
+
+    setTimeout(startGrandPrix,500);
+
+  }
 
 }
 
 
-/* OPENING */
+
+/* =========================
+   OPENING
+========================= */
 
 function startRace(){
 
-const car =
-document.getElementById("openingCar");
+  const car =
+  document.getElementById("openingCar");
 
-car.classList.add("drive");
-
-setTimeout(()=>{
-showPage(2);
-confetti();
-},1900);
-
-}
+  car.classList.add("drive");
 
 
-/* MINI GAME */
+  setTimeout(()=>{
 
-let boosts = 0;
+    showPage(2);
 
-function boost(){
+    createConfetti();
 
-if(boosts >= 8) return;
-
-boosts++;
-
-const car =
-document.getElementById("gameCar");
-
-const progress =
-document.getElementById("progress");
-
-const maxMove = 78;
-
-let position =
-(boosts / 8) * maxMove;
-
-car.style.left =
-position + "%";
-
-progress.innerText =
-boosts + " / 8 BOOSTS";
-
-if(boosts === 8){
-
-progress.innerText =
-"FINISH!!! 🏁";
-
-setTimeout(()=>{
-showPage(4);
-confetti();
-},700);
-
-}
+  },1900);
 
 }
 
 
-/* GARAGE */
+
+/* =========================
+   GRAND PRIX VARIABLES
+========================= */
+
+let lane = 1;
+
+let scoreGame = 0;
+
+let livesGame = 3;
+
+let distanceGame = 0;
+
+let gameRunning = false;
+
+let obstacleTimer;
+
+let starTimer;
+
+let distanceTimer;
+
+
+const lanePositions = [
+  "8%",
+  "42%",
+  "75%"
+];
+
+
+
+/* =========================
+   CONTROLS
+========================= */
+
+function moveLeft(){
+
+  if(!gameRunning) return;
+
+
+  if(lane > 0){
+
+    lane--;
+
+    updateCarPosition();
+
+  }
+
+}
+
+
+function moveRight(){
+
+  if(!gameRunning) return;
+
+
+  if(lane < 2){
+
+    lane++;
+
+    updateCarPosition();
+
+  }
+
+}
+
+
+function updateCarPosition(){
+
+  document
+  .getElementById("playerCar")
+  .style.left =
+  lanePositions[lane];
+
+}
+
+
+/* keyboard juga bisa */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+  if(event.key === "ArrowLeft"){
+
+    moveLeft();
+
+  }
+
+
+  if(event.key === "ArrowRight"){
+
+    moveRight();
+
+  }
+
+});
+
+
+
+/* =========================
+   START GRAND PRIX
+========================= */
+
+function startGrandPrix(){
+
+  stopGameTimers();
+
+  clearGameObjects();
+
+
+  lane = 1;
+
+  scoreGame = 0;
+
+  livesGame = 3;
+
+  distanceGame = 0;
+
+  gameRunning = true;
+
+
+  updateCarPosition();
+
+  updateGameInfo();
+
+
+  obstacleTimer =
+  setInterval(()=>{
+
+    createObstacle();
+
+  },950);
+
+
+  starTimer =
+  setInterval(()=>{
+
+    createStar();
+
+  },1650);
+
+
+  distanceTimer =
+  setInterval(()=>{
+
+    if(!gameRunning) return;
+
+
+    distanceGame++;
+
+
+    document
+    .getElementById("distance")
+    .innerText =
+    "🏁 " + distanceGame + "%";
+
+
+    if(distanceGame >= 100){
+
+      winRace();
+
+    }
+
+  },180);
+
+}
+
+
+
+/* =========================
+   OBSTACLE
+========================= */
+
+function createObstacle(){
+
+  if(!gameRunning) return;
+
+
+  const game =
+  document.getElementById("raceGame");
+
+
+  const obstacle =
+  document.createElement("div");
+
+
+  obstacle.className =
+  "obstacle";
+
+
+  const obstacles = [
+    "🚧",
+    "🛞",
+    "🪨"
+  ];
+
+
+  obstacle.innerText =
+  obstacles[
+    Math.floor(
+      Math.random() *
+      obstacles.length
+    )
+  ];
+
+
+  const obstacleLane =
+  Math.floor(
+    Math.random()*3
+  );
+
+
+  obstacle.style.left =
+  lanePositions[obstacleLane];
+
+
+  game.appendChild(obstacle);
+
+
+  let top = -60;
+
+
+  const fall =
+  setInterval(()=>{
+
+    if(!gameRunning){
+
+      clearInterval(fall);
+
+      obstacle.remove();
+
+      return;
+
+    }
+
+
+    top += 7;
+
+
+    obstacle.style.top =
+    top + "px";
+
+
+    if(
+      top > 315 &&
+      top < 385 &&
+      obstacleLane === lane
+    ){
+
+      clearInterval(fall);
+
+      obstacle.remove();
+
+      crashCar();
+
+      return;
+
+    }
+
+
+    if(top > 440){
+
+      clearInterval(fall);
+
+      obstacle.remove();
+
+    }
+
+  },30);
+
+}
+
+
+
+/* =========================
+   STAR
+========================= */
+
+function createStar(){
+
+  if(!gameRunning) return;
+
+
+  const game =
+  document.getElementById("raceGame");
+
+
+  const star =
+  document.createElement("div");
+
+
+  star.className =
+  "starItem";
+
+
+  star.innerText =
+  "⭐";
+
+
+  const starLane =
+  Math.floor(
+    Math.random()*3
+  );
+
+
+  star.style.left =
+  lanePositions[starLane];
+
+
+  game.appendChild(star);
+
+
+  let top = -50;
+
+
+  const fall =
+  setInterval(()=>{
+
+    if(!gameRunning){
+
+      clearInterval(fall);
+
+      star.remove();
+
+      return;
+
+    }
+
+
+    top += 6;
+
+
+    star.style.top =
+    top + "px";
+
+
+    if(
+      top > 315 &&
+      top < 385 &&
+      starLane === lane
+    ){
+
+      clearInterval(fall);
+
+      star.remove();
+
+      scoreGame += 100;
+
+      updateGameInfo();
+
+      return;
+
+    }
+
+
+    if(top > 440){
+
+      clearInterval(fall);
+
+      star.remove();
+
+    }
+
+  },30);
+
+}
+
+
+
+/* =========================
+   CRASH
+========================= */
+
+function crashCar(){
+
+  if(!gameRunning) return;
+
+
+  livesGame--;
+
+
+  updateGameInfo();
+
+
+  const game =
+  document.getElementById("raceGame");
+
+
+  game.classList.add("crash");
+
+
+  setTimeout(()=>{
+
+    game.classList.remove("crash");
+
+  },300);
+
+
+  if(livesGame <= 0){
+
+    loseRace();
+
+  }
+
+}
+
+
+
+/* =========================
+   INFO
+========================= */
+
+function updateGameInfo(){
+
+  document
+  .getElementById("score")
+  .innerText =
+  "⭐ " + scoreGame;
+
+
+  let hearts = "";
+
+
+  for(
+    let i=0;
+    i<livesGame;
+    i++
+  ){
+
+    hearts += "❤️";
+
+  }
+
+
+  document
+  .getElementById("lives")
+  .innerText =
+  hearts || "💀";
+
+
+  document
+  .getElementById("distance")
+  .innerText =
+  "🏁 " + distanceGame + "%";
+
+}
+
+
+
+/* =========================
+   WIN
+========================= */
+
+function winRace(){
+
+  if(!gameRunning) return;
+
+
+  gameRunning = false;
+
+
+  stopGameTimers();
+
+
+  document
+  .getElementById("finalScore")
+  .innerText =
+  "your score: ⭐ " +
+  scoreGame;
+
+
+  createConfetti();
+
+
+  setTimeout(()=>{
+
+    clearGameObjects();
+
+    showPage(4);
+
+  },700);
+
+}
+
+
+
+/* =========================
+   LOSE
+========================= */
+
+function loseRace(){
+
+  gameRunning = false;
+
+
+  stopGameTimers();
+
+
+  setTimeout(()=>{
+
+    alert(
+      "ARYAAA 😭 mobilmu nabrak!\n\nayo coba lagi 🏎️💨"
+    );
+
+
+    clearGameObjects();
+
+    startGrandPrix();
+
+  },300);
+
+}
+
+
+
+/* =========================
+   STOP TIMERS
+========================= */
+
+function stopGameTimers(){
+
+  clearInterval(
+    obstacleTimer
+  );
+
+  clearInterval(
+    starTimer
+  );
+
+  clearInterval(
+    distanceTimer
+  );
+
+}
+
+
+
+/* =========================
+   CLEAR OBJECTS
+========================= */
+
+function clearGameObjects(){
+
+  document
+  .querySelectorAll(
+    ".obstacle, .starItem"
+  )
+  .forEach(item=>{
+
+    item.remove();
+
+  });
+
+}
+
+
+
+/* =========================
+   GARAGE
+========================= */
 
 function openGarage(){
 
-confetti();
+  createConfetti();
 
-setTimeout(()=>{
-showPage(6);
-},700);
+
+  setTimeout(()=>{
+
+    showPage(6);
+
+  },650);
 
 }
 
 
-/* FINAL */
+
+/* =========================
+   FINAL LAP
+========================= */
 
 function finalLap(){
 
-showPage(8);
+  showPage(8);
 
-confetti();
 
-setTimeout(confetti,800);
-setTimeout(confetti,1600);
+  createConfetti();
+
+
+  setTimeout(
+    createConfetti,
+    700
+  );
+
+
+  setTimeout(
+    createConfetti,
+    1400
+  );
+
+}
+
+
+
+/* =========================
+   CONFETTI
+========================= */
+
+function createConfetti(){
+
+  const icons = [
+    "❤️",
+    "🤍",
+    "⭐",
+    "🏁",
+    "✨"
+  ];
+
+
+  for(
+    let i=0;
+    i<30;
+    i++
+  ){
+
+    const item =
+    document.createElement("div");
+
+
+    item.className =
+    "confetti";
+
+
+    item.innerText =
+    icons[
+      Math.floor(
+        Math.random() *
+        icons.length
+      )
+    ];
+
+
+    item.style.left =
+    Math.random()*100 +
+    "vw";
+
+
+    item.style.animationDuration =
+    (
+      2.5 +
+      Math.random()*2
+    ) +
+    "s";
+
+
+    document.body
+    .appendChild(item);
+
+
+    setTimeout(()=>{
+
+      item.remove();
+
+    },5000);
+
+  }
 
 }
 
 
-/* HEART CONFETTI */
 
-function confetti(){
+/* =========================
+   RESTART
+========================= */
 
-const icons =
-["❤️","🤍","🏁","⭐","✨"];
+function restartWebsite(){
 
-for(let i=0;i<28;i++){
+  gameRunning = false;
 
-let heart =
-document.createElement("div");
+  stopGameTimers();
 
-heart.className="heart";
+  clearGameObjects();
 
-heart.innerText =
-icons[
-Math.floor(
-Math.random()*icons.length
-)
-];
 
-heart.style.left =
-Math.random()*100+"vw";
+  const openingCar =
+  document
+  .getElementById(
+    "openingCar"
+  );
 
-heart.style.animationDuration =
-(2+Math.random()*3)+"s";
 
-document.body.appendChild(heart);
+  openingCar
+  .classList
+  .remove("drive");
 
-setTimeout(()=>{
-heart.remove();
-},5000);
 
-}
+  showPage(1);
 
 }
 
