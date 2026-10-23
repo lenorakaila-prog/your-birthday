@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Arya's Birthday Race 🏁</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  background: #f5d7a1;
+  color: #fff;
+}
+
+.page {
+  display: none;
+  width: 100%;
+  height: 100vh;
+  padding: 30px 22px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.page.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: masuk .6s ease;
+}
+
+@keyframes masuk {
+  from {opacity:0; transform:scale(.96);}
+  to {opacity:1; transform:scale(1);}
+}
+
+/* ---------- BACKGROUND ---------- */
+
+.desert {
+  background:
+    linear-gradient(#68c8e8 0 58%, #e7a858 58% 100%);
+}
+
+.sunset {
+  background:
+    linear-gradient(#f59b6b, #d85d68 45%, #522c5e);
+}
+
+/* awan */
+
+.cloud {
+  position:absolute;
+  width:100px;
+  height:30px;
+  background:white;
+  border-radius:30px;
+  opacity:.85;
+}
+
+.cloud:before,
+.cloud:after {
+  content:"";
+  position:absolute;
+  background:white;
+  border-radius:50%;
+}
+
+.cloud:before {
+  width:45px;
+  height:45px;
+  left:15px;
+  top:-20px;
+}
+
+.cloud:after {
+  width:55px;
+  height:55px;
+  right:10px;
+  top:-27px;
+}
+
+/* jalan */
+
+.road {
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:27%;
+  background:#343434;
+  border-top:8px solid #d8b071;
+}
+
+.road:after {
+  content:"";
+  position:absolute;
+  width:100%;
+  height:6px;
+  top:48%;
+  left:0;
+  background:repeating-linear-gradient(
+    90deg,
+    #ffd85a 0 45px,
+    transparent 45px 85px
+  );
+}
+
+/* ---------- CARD ---------- */
+
+.card {
+  background:rgba(255,255,255,.94);
+  color:#392e2e;
+  width:min(90%, 480px);
+  padding:28px 22px;
+  border-radius:25px;
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+  z-index:5;
+}
+
+h1 {
+  font-size:36px;
+  margin-bottom:10px;
+}
+
+h2 {
+  margin-bottom:15px;
+}
+
+p {
+  line-height:1.6;
+}
+
+.small {
+  font-size:14px;
+  opacity:.75;
+}
+
+/* ---------- BUTTON ---------- */
+
+button {
+  border:0;
+  margin-top:22px;
+  padding:14px 25px;
+  border-radius:30px;
+  background:#c52c2c;
+  color:white;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 6px 0 #7c1717;
+}
+
+button:active {
+  transform:translateY(4px);
+  box-shadow:0 2px 0 #7c1717;
+}
+
+/* ---------- MOBIL ---------- */
+
+.car {
+  position:absolute;
+  bottom:16%;
+  left:-140px;
+  font-size:75px;
+  z-index:3;
+}
+
+.drive {
+  animation:drive 2.3s ease-in-out forwards;
+}
+
+@keyframes drive {
+  0% {left:-140px;}
+  70% {left:55%;}
+  100% {left:110%;}
+}
+
+/* ---------- START LIGHT ---------- */
+
+.lights {
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  margin:25px;
+}
+
+.light {
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:#333;
+}
+
+.red {background:#e33;}
+.yellow {background:#ffd43b;}
+.green {background:#47c96b;}
+
+/* ---------- GAME ---------- */
+
+.track {
+  position:relative;
+  width:90%;
+  max-width:500px;
+  height:130px;
+  background:#444;
+  border-radius:20px;
+  margin-top:25px;
+  overflow:hidden;
+  border:5px solid white;
+}
+
+.gameCar {
+  position:absolute;
+  left:5px;
+  top:30px;
+  font-size:55px;
+  transition:left .3s;
+}
+
+.finish {
+  position:absolute;
+  right:15px;
+  height:100%;
+  font-size:55px;
+  display:flex;
+  align-items:center;
+}
+
+.progress {
+  margin-top:15px;
+  font-weight:bold;
+}
+
+/* ---------- GARAGE ---------- */
+
+.garage {
+  font-size:100px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.garage:hover {
+  transform:scale(1.08);
+}
+
+/* ---------- LETTER ---------- */
+
+.letter {
+  max-height:65vh;
+  overflow-y:auto;
+  text-align:left;
+  font-size:15px;
+}
+
+.letter p {
+  margin-bottom:15px;
+}
+
+/* ---------- HEARTS ---------- */
+
+.heart {
+  position:absolute;
+  font-size:25px;
+  animation:float 4s linear forwards;
+}
+
+@keyframes float {
+  from {
+    transform:translateY(100vh);
+    opacity:1;
+  }
+  to {
+    transform:translateY(-100px);
+    opacity:0;
+  }
+}
+
+/* ---------- CHECKERED ---------- */
+
+.checkered {
+  height:25px;
+  width:100%;
+  position:absolute;
+  top:0;
+  background:
+    conic-gradient(#fff 25%,#222 0 50%,#fff 0 75%,#222 0)
+    0 0/30px 30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= OPENING ================= -->
+
+<section class="page desert active" id="p1">
+
+<div class="checkered"></div>
+
+<div class="cloud" style="top:15%;left:8%"></div>
+<div class="cloud" style="top:22%;right:10%;transform:scale(.7)"></div>
+
+<div class="card">
+  <div class="small">🏁 SPECIAL RACE INVITATION</div>
+
+  <h1>ARYA'S<br>BIRTHDAY RACE</h1>
+
+  <p>
+    psst... today's race is a little different 👀
+  </p>
+
+  <div class="lights">
+    <div class="light red"></div>
+    <div class="light yellow"></div>
+    <div class="light green"></div>
+  </div>
+
+  <p><b>Ready, racer?</b></p>
+
+  <button onclick="startRace()">
+    START THE ENGINE 🏁
+  </button>
+</div>
+
+<div class="road"></div>
+<div class="car" id="openingCar">🏎️</div>
+
+</section>
+
+
+<!-- ================= BIRTHDAY ================= -->
+
+<section class="page desert" id="p2">
+
+<div class="cloud" style="top:12%;right:10%"></div>
+
+<div class="card">
+
+  <div style="font-size:55px">🎂🏎️</div>
+
+  <h1>HAPPY BIRTHDAY!</h1>
+
+  <h2>ARYAAA 🤍</h2>
+
+  <p>
+    another lap around the sun completed!
+  </p>
+
+  <p style="margin-top:12px">
+    24 • 12 • 2011
+  </p>
+
+  <button onclick="showPage(3)">
+    NEXT PIT STOP →
+  </button>
+
+</div>
+
+<div class="road"></div>
+
+</section>
+
+
+<!-- ================= GAME ================= -->
+
+<section class="page desert" id="p3">
+
+<div class="card">
+
+<h2>🏁 PIT STOP #1</h2>
+
+<p>
+before you get your birthday present...
+</p>
+
+<p>
+<b>prove you're a real racer 😼</b>
+</p>
+
+<div class="track">
+
+<div class="gameCar" id="gameCar">
+🏎️
+</div>
+
+<div class="finish">
+🏁
+</div>
+
+</div>
+
+<div class="progress" id="progress">
+0 / 8 BOOSTS
+</div>
+
+<button onclick="boost()">
+BOOST! 💨
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ================= WIN ================= -->
+
+<section class="page sunset" id="p4">
+
+<div class="card">
+
+<div style="font-size:65px">
+🏆
+</div>
+
+<h1>FINISH!!</h1>
+
+<p>
+okayyy racer...
+</p>
+
+<p>
+you actually made it 😭
+</p>
+
+<p style="margin-top:10px">
+<b>you earned your birthday present.</b>
+</p>
+
+<button onclick="showPage(5)">
+OPEN PRESENT 🎁
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ================= GARAGE ================= -->
+
+<section class="page desert" id="p5">
+
+<div class="card">
+
+<h2>SECRET GARAGE 👀</h2>
+
+<p>
+wait...
+</p>
+
+<p>
+there's something hiding in here.
+</p>
+
+<div class="garage" onclick="openGarage()">
+🚪
+</div>
+
+<p class="small">
+tap the garage
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ================= SURPRISE ================= -->
+
+<section class="page desert" id="p6">
+
+<div class="card">
+
+<div style="font-size:55px">
+💌
+</div>
+
+<h2>A MESSAGE FOR YOU</h2>
+
+<p>
+okay this part is actually serious...
+</p>
+
+<p>
+maybe 😒
+</p>
+
+<button onclick="showPage(7)">
+READ IT 💌
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ================= LETTER ================= -->
+
+<section class="page sunset" id="p7">
+
+<div class="card letter">
+
+<h2 style="text-align:center">
+for Arya 🤍
+</h2>
+
+<p>
+happy birthday, Aryaaa!! 🏎️🤍
+</p>
+
+<p>
+akhirnya nambah umur juga kamu wkwkwk.
+semoga di umur kamu yang sekarang, banyak hal baik yang dateng ke kamu.
+semoga kamu selalu sehat, bahagia, makin rajin belajarnya,
+dan apa yang kamu pengenin satu-satu bisa tercapai.
+</p>
+
+<p>
+makasih yaa udah hadir di hidup aku.
+makasih juga buat semua effort kamu selama ini,
+bahkan dari hal-hal kecil yang mungkin menurut kamu biasa aja.
+tapi buat aku, itu berarti banget.
+</p>
+
+<p>
+aku seneng bisa kenal kamu,
+bisa denger cerita-cerita kamu,
+bercanda sama kamu,
+dan punya banyak momen bareng kamu.
+</p>
+
+<p>
+pokoknya jangan berubah jadi Arya
+yang nyebelin banget aja 😒
+</p>
+
+<p>
+di umur baru ini,
+aku harap kamu bisa jadi versi diri kamu
+yang lebih baik lagi.
+</p>
+
+<p>
+jangan gampang nyerah kalau ada sesuatu
+yang nggak berjalan sesuai yang kamu mau.
+pelan-pelan aja,
+yang penting tetep maju.
+</p>
+
+<p>
+dan karena ini birthday race kamu...
+</p>
+
+<p>
+semoga perjalanan kamu ke depannya
+selalu ketemu jalan-jalan yang baik,
+orang-orang yang baik,
+dan banyak hal yang bikin kamu bahagia.
+</p>
+
+<p>
+kalau suatu saat jalannya agak berat,
+semoga kamu selalu punya alasan
+buat terus jalan lagi. 🏁
+</p>
+
+<p>
+<b>
+once again,<br>
+happy birthday, Arya 🤍
+</b>
+</p>
+
+<p>
+enjoy your new lap!
+</p>
+
+<p style="text-align:right">
+— from your favorite passenger 🏎️💨
+</p>
+
+<div style="text-align:center">
+<button onclick="finalLap()">
+FINAL LAP 🏁
+</button>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= END ================= -->
+
+<section class="page sunset" id="p8">
+
+<div class="checkered"></div>
+
+<div class="card">
+
+<div style="font-size:60px">
+🏎️💨
+</div>
+
+<h1>FINAL LAP</h1>
+
+<p>
+no matter how many laps you take...
+</p>
+
+<p style="margin-top:15px">
+<b>
+i hope this year takes you
+somewhere amazing.
+</b>
+</p>
+
+<div style="font-size:35px;margin:20px">
+🤍
+</div>
+
+<h2>
+happy birthday, Arya.
+</h2>
+
+<p>
+— your favorite passenger
+</p>
+
+<button onclick="location.reload()">
+RACE AGAIN ↻
+</button>
+
+</div>
+
+<div class="road"></div>
+
+</section>
+
+
+<script>
+
+function showPage(number){
+
+document.querySelectorAll(".page")
+.forEach(page=>{
+page.classList.remove("active");
+});
+
+document.getElementById("p"+number)
+.classList.add("active");
+
+}
+
+
+/* OPENING */
+
+function startRace(){
+
+const car =
+document.getElementById("openingCar");
+
+car.classList.add("drive");
+
+setTimeout(()=>{
+showPage(2);
+confetti();
+},1900);
+
+}
+
+
+/* MINI GAME */
+
+let boosts = 0;
+
+function boost(){
+
+if(boosts >= 8) return;
+
+boosts++;
+
+const car =
+document.getElementById("gameCar");
+
+const progress =
+document.getElementById("progress");
+
+const maxMove = 78;
+
+let position =
+(boosts / 8) * maxMove;
+
+car.style.left =
+position + "%";
+
+progress.innerText =
+boosts + " / 8 BOOSTS";
+
+if(boosts === 8){
+
+progress.innerText =
+"FINISH!!! 🏁";
+
+setTimeout(()=>{
+showPage(4);
+confetti();
+},700);
+
+}
+
+}
+
+
+/* GARAGE */
+
+function openGarage(){
+
+confetti();
+
+setTimeout(()=>{
+showPage(6);
+},700);
+
+}
+
+
+/* FINAL */
+
+function finalLap(){
+
+showPage(8);
+
+confetti();
+
+setTimeout(confetti,800);
+setTimeout(confetti,1600);
+
+}
+
+
+/* HEART CONFETTI */
+
+function confetti(){
+
+const icons =
+["❤️","🤍","🏁","⭐","✨"];
+
+for(let i=0;i<28;i++){
+
+let heart =
+document.createElement("div");
+
+heart.className="heart";
+
+heart.innerText =
+icons[
+Math.floor(
+Math.random()*icons.length
+)
+];
+
+heart.style.left =
+Math.random()*100+"vw";
+
+heart.style.animationDuration =
+(2+Math.random()*3)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},5000);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
